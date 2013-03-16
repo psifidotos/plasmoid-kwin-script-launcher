@@ -9,14 +9,34 @@ import org.kde.workflow.components 0.1 as WorkFlowComponents
 Item{
     property int minimumWidth: 10
     property int minimumHeight: 10
-    property int maximumWidth: 256
+   /* property int maximumWidth: 256
     property int maximumHeight: 256
     property int preferredWidth: 256
-    property int preferredHeight: 256
+    property int preferredHeight: 256*/
 
     WorkFlowComponents.SessionParameters {
         id: sessionParameters
     }
+
+    onWidthChanged: checkLayout();
+    onHeightChanged: checkLayout();
+
+    function checkLayout() {
+        switch(plasmoid.formFactor) {
+        case Vertical:
+            plasmoid.setPreferredSize(width, width);
+            break;
+
+        case Horizontal:
+            plasmoid.setPreferredSize(height, height);
+            break;
+
+        default:
+            plasmoid.setPreferredSize(height, height);
+            break;
+        }
+    }
+
 
     PlasmaCore.IconItem{
         id:mainIcon
@@ -112,5 +132,6 @@ Item{
 
     Component.onCompleted:{
         plasmoid.aspectRatioMode = "ConstrainedSquare"
+        checkLayout();
     }
 }
