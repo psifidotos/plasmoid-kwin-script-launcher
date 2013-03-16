@@ -1,0 +1,11 @@
+*~
+.*
+!.gitignore
+*.kdev4
+
+build/
+install/
+spec/
+Announcements/
+dataengines/build/
+qdbus/build/
