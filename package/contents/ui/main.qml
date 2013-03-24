@@ -6,6 +6,8 @@ import org.kde.qtextracomponents 0.1
 
 import org.kde.workflow.components 0.1 as WorkFlowComponents
 
+import "."
+
 Item{
     property int minimumWidth: 10
     property int minimumHeight: 10
@@ -37,8 +39,41 @@ Item{
         }
     }
 
+    IconButton{
+        id:mainIcon
+        anchors.centerIn: parent
 
-    PlasmaCore.IconItem{
+        width:parent.width
+        height:parent.height
+        icon: iconPath
+        smooth:true
+      //  active:mouseAreaContainer.containsMouse
+        opacity: mouseAreaContainer.containsMouse ? 1 : 0.93
+
+        property string iconPath: sessionParameters.currentActivityIcon;
+
+        Behavior on opacity{
+            NumberAnimation {
+                duration:  Settings.global.animationStep;
+                easing.type: Easing.InOutQuad;
+            }
+        }
+
+        IconButton{
+            anchors.right: parent.horizontalCenter
+            anchors.bottom: parent.verticalCenter
+
+            width:parent.width/2
+            height:parent.height/2
+            icon: "preferences-activities"
+            smooth:true
+            visible: Settings.global.useCurrentActivityIcon
+        //    active:mouseAreaContainer.containsMouse
+        }
+    }
+
+
+    /*PlasmaCore.IconItem{
         id:mainIcon
         anchors.fill: parent
         source: sessionParameters.currentActivityIcon
@@ -56,7 +91,7 @@ Item{
 
             active:mouseAreaContainer.containsMouse
         }
-    }
+    }*/
 
     PlasmaExtras.PressedAnimation{
         id:pressedAnimation

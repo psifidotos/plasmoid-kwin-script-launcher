@@ -1,0 +1,8 @@
+0.1.1
+=====
+-- drop Plasma IconItem support in order to retain support for Plasma Desktop 4.9
+
+0.1.0
+=====
+-- initial release
+-- scroll wheel to change activity based on the WorkFlow activity order
